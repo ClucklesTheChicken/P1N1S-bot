@@ -4,114 +4,63 @@
 const Discord = require("discord.js");
 require("dotenv").config();
 
-const generateImage = require("./generateImage")
-
-let randomkak = require("./randomkak.json");
-const { default: WOKCommands } = require("wokcommands");
-randomkak = JSON.parse(JSON.stringify(randomkak));
 const Client = new Discord.Client({
     intents:["Guilds","GuildMessages","DirectMessages","MessageContent","GuildMembers"], partials: ["CHANNEL", "GUILD_MEMBER","MESSAGE","REACTION","USER"]
 });
 
-Client.on("ready", (function(client){
-    console.log("Ready to do P1N1S things");
-    const guildId = '1019232207321174036';
-    const guild = client.guilds.cache.get(guildId);
-    let commands
-    if(guild){
-        commands = guild.commands;
-    }
-    else{
-        commands = client.application?.commands;
-    }
-
-    commands?.create({
-        name: 'ping',
-        description: 'Replies with pong.',
-    });
-
-    commands?.create({
-        name: 'add',
-        description: 'Adds kak together',
-        options: [
-            {
-                name: 'num1',
-                description: 'first number',
-                required: true,
-                type: 10 // NUMBER, 5 is BOOLEAN, 6 is USER, 3 is STRING
-            },
-            {
-                name: 'num2',
-                description: 'second number',
-                required: true,
-                type: 10 
-            }
-        ]
-    });
-}));
-
-
-function between(min, max) {  
-    return Math.floor(
-      Math.random() * (max - min) + min
-    )
+let bot = {
+    Client,
+    prefix: "/p1n",
+    owners: ["267419212710936578"]
 }
 
-Client.on("interactionCreate", async (interaction) => {
-    if(!interaction.isCommand()){
-        return;
-    }
+Client.commands = new Discord.Collection();
+Client.events = new Discord.Collection();
 
-    const { commandName, options } = interaction;
+Client.loadEvents = (bot, reload) => require("./handlers/events")(bot, reload);
+Client.loadCommands = (bot, reload) => require("./handlers/commands")(bot, reload);
 
-    if(commandName === 'ping'){
-        interaction.reply({
-            content: 'pong',
-            ephemeral: true //only user can see it
-        })
-    }
-    else if(commandName === 'add'){
-        const num1 = parseInt(options.getNumber('num1')) || 0;
-        const num2 = parseInt(options.getNumber('num2')) || 0;
-        let sum = num1 + num2;
-        interaction.reply({
-            content: 'The sum is '+ sum
-        });
-    }
-});
+Client.loadEvents(bot, false);
+Client.loadCommands(bot, false);
 
-const WelcomeChannelID = "1019528882312982548";
+module.exports = bot;
 
-Client.on("guildMemberAdd", async (member) =>{
-    const img = await generateImage(member);
-    member.guild.channels.cache.get(WelcomeChannelID).send({
-        content: `<@${member.id}>`+' Welcome to the server!',
-        files: [img]
-    })
-});
+// Client.on("ready", (function(client){
+//     const guildId = '1019232207321174036';
+//     const guild = client.guilds.cache.get(guildId);
+//     let commands
+//     if(guild){
+//         commands = guild.commands;
+//     }
+//     else{
+//         commands = client.application?.commands;
+//     }
 
 
-Client.on("messageCreate", async (message) =>{
-    if(!message.author.bot){
-        var voiceChannel = message.member.voiceChannel;
-        // const img2 = await generateImage(message.member);
-        // message.member.guild.channels.cache.get(WelcomeChannelID).send({
-        //     // content: `<@${message.member.id}>`+' Welcome to the server!',
-        //     files: [img2]
-        // })
-        if(message.content.indexOf("poes") !== -1){
-            message.reply("no u are a poes");
-        }
-        else if(message.content.indexOf("hello") !== -1){
-            message.reply("Hello");
-        }
-        else{
-            message.reply("idk wtf you said, so I'm gonna say "+randomkak[between(0, Object.keys(randomkak).length)]); 
-        }
-        
-    }
-    
-});
+//     commands?.create({
+//         name: 'add',
+//         description: 'Adds kak together',
+//         options: [
+//             {
+//                 name: 'num1',
+//                 description: 'first number',
+//                 required: true,
+//                 type: 10 // NUMBER, 5 is BOOLEAN, 6 is USER, 3 is STRING
+//             },
+//             {
+//                 name: 'num2',
+//                 description: 'second number',
+//                 required: true,
+//                 type: 10 
+//             }
+//         ]
+//     });
+// }));
+
+
+
+
+
 
 
 
