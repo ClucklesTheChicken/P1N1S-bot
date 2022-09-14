@@ -3,11 +3,14 @@
 // Invite Link: https://discord.com/oauth2/authorize?client_id=1019232754946293850&scope=bot&permissions=1
 const Discord = require("discord.js");
 require("dotenv").config();
+
+const generateImage = require("./generateImage")
+
 let randomkak = require("./randomkak.json");
 const { default: WOKCommands } = require("wokcommands");
 randomkak = JSON.parse(JSON.stringify(randomkak));
 const Client = new Discord.Client({
-    intents:["Guilds","GuildMessages","DirectMessages","MessageContent"], partials: ["CHANNEL", "GUILD_MEMBER","MESSAGE","REACTION","USER"]
+    intents:["Guilds","GuildMessages","DirectMessages","MessageContent","GuildMembers"], partials: ["CHANNEL", "GUILD_MEMBER","MESSAGE","REACTION","USER"]
 });
 
 Client.on("ready", (function(client){
@@ -77,10 +80,25 @@ Client.on("interactionCreate", async (interaction) => {
     }
 });
 
+const WelcomeChannelID = "1019528882312982548";
 
-Client.on("messageCreate", (function(message){
+Client.on("guildMemberAdd", async (member) =>{
+    const img = await generateImage(member);
+    member.guild.channels.cache.get(WelcomeChannelID).send({
+        content: `<@${member.id}>`+' Welcome to the server!',
+        files: [img]
+    })
+});
+
+
+Client.on("messageCreate", async (message) =>{
     if(!message.author.bot){
         var voiceChannel = message.member.voiceChannel;
+        // const img2 = await generateImage(message.member);
+        // message.member.guild.channels.cache.get(WelcomeChannelID).send({
+        //     // content: `<@${message.member.id}>`+' Welcome to the server!',
+        //     files: [img2]
+        // })
         if(message.content.indexOf("poes") !== -1){
             message.reply("no u are a poes");
         }
@@ -93,7 +111,7 @@ Client.on("messageCreate", (function(message){
         
     }
     
-}));
+});
 
 
 
