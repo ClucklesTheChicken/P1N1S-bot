@@ -1,0 +1,18 @@
+{
+  "name": "p1n1s-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cluckles",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/opus": "^0.8.0",
+    "discord.js": "^14.3.0",
+    "dotenv": "^16.0.2",
+    "ffmpeg-static": "^5.1.0",
+    "wokcommands": "^1.5.3"
+  }
+}
