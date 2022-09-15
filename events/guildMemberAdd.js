@@ -5,7 +5,7 @@ module.exports = {
     name: "guildMemberAdd",
     run: async (bot, member) => {
         const {Client, prefix} = bot;
-        const WelcomeChannelID = "1019528882312982548";
+        const WelcomeChannelID = "927606306678915112";
         const img = await generateImage(member);
         member.guild.channels.cache.get(WelcomeChannelID).send({
             content: `<@${member.id}>`+' Welcome to the server!',

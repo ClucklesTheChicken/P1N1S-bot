@@ -16,8 +16,9 @@ module.exports = {
         "Kyle is a cunt",
         "Quinton smells like old lady",
         "Steve has nik nak toes",
-        "Jam has a small pee pee, and likes nik nak toes"];
-        
+        "Jam has a small pee pee, and likes nik nak toes",
+        "Jean must kill his gf - From Popsey",
+        "Popsey must kill her husband - From Jean"];        
         if(message.content.indexOf("poes") !== -1){
             message.reply("no u are a poes");
         }

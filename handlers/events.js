@@ -54,4 +54,9 @@ function initEvents(bot){
     Client.on("guildMemberAdd", (member) =>{
         triggerEventHandler(bot, "guildMemberAdd", member);
     });
+
+    Client.on("guildMemberUpdate", (member) =>{
+        triggerEventHandler(bot, "guildMemberUpdate", member);
+    });
+    
 }

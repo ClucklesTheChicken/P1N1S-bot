@@ -5,12 +5,12 @@ const Discord = require("discord.js");
 require("dotenv").config();
 
 const Client = new Discord.Client({
-    intents:["Guilds","GuildMessages","DirectMessages","MessageContent","GuildMembers"], partials: ["CHANNEL", "GUILD_MEMBER","MESSAGE","REACTION","USER"]
+    intents:["Guilds","GuildMessages","DirectMessages","MessageContent","GuildMembers","GuildVoiceStates","GuildPresences","GuildIntegrations"], partials: ["CHANNEL", "GUILD_MEMBER","MESSAGE","REACTION","USER"]
 });
 
 let bot = {
     Client,
-    prefix: "/p1n",
+    prefix: "~",
     owners: ["267419212710936578"]
 }
 
@@ -25,8 +25,10 @@ Client.loadCommands(bot, false);
 
 module.exports = bot;
 
+// PULL CUNTS INTO PIT FIRST THEN MUSIC IF YOU WANT TO CALL IT THAT
+
 // Client.on("ready", (function(client){
-//     const guildId = '1019232207321174036';
+//     const guildId = '267420294552092674';
 //     const guild = client.guilds.cache.get(guildId);
 //     let commands
 //     if(guild){
