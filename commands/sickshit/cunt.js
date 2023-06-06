@@ -44,6 +44,7 @@ module.exports = {
                 player.stop();
                 voice.getVoiceConnection(requester.guild.id).disconnect();
             }
+            console.log(oldState,newState);
 
         });
         player.on('error', error => {
