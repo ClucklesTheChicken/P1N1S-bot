@@ -1,6 +1,15 @@
 // ID: 1019232754946293850
 // TOKEN: HIDDEN BITCH
 // Invite Link: https://discord.com/oauth2/authorize?client_id=1019232754946293850&scope=bot&permissions=1
+
+process
+  .on('unhandledRejection', (reason, p) => {
+    console.error(reason, 'Unhandled Rejection at Promise', p);
+  })
+  .on('uncaughtException', err => {
+    console.error(err, 'Uncaught Exception thrown');
+  });
+
 const Discord = require("discord.js");
 require("dotenv").config();
 
