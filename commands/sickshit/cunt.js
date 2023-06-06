@@ -37,7 +37,15 @@ module.exports = {
         connection.subscribe(player);
         player.play(resource);
 
+        player.on('stateChange', (oldState, newState) => {
 
+            if(oldState == AudioPlayerStatus.Playing && newState == AudioPlayerStatus.Idle){
+                console.log('The audio player switched from playing to Idle');
+                player.stop();
+                voice.getVoiceConnection(requester.guild.id).disconnect();
+            }
+
+        });
         player.on('error', error => {
             console.error(`Error: ${error.message} with resource ${error.resource.metadata.title}`);
         });
@@ -45,11 +53,11 @@ module.exports = {
         player.on(AudioPlayerStatus.Playing, () => {
             console.log('The audio player has started playing!');
         });
-        player.on(AudioPlayerStatus.Idle, () => {
-            console.log('The audio player is Idle');
-            player.stop();
-            voice.getVoiceConnection(requester.guild.id).disconnect();
-        });
+        // player.on(AudioPlayerStatus.Idle, () => {
+        //     console.log('The audio player is Idle');
+        //     player.stop();
+        //     voice.getVoiceConnection(requester.guild.id).disconnect();
+        // });
         player.on(AudioPlayerStatus.Buffering, () => {
             console.log('The audio player is buffering');
         });
