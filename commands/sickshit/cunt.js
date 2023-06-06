@@ -39,12 +39,12 @@ module.exports = {
 
         player.on('stateChange', (oldState, newState) => {
 
-            if(oldState == AudioPlayerStatus.Playing && newState == AudioPlayerStatus.Idle){
+            if(oldState.status === AudioPlayerStatus.Playing && newState.status === AudioPlayerStatus.Idle){
                 console.log('The audio player switched from playing to Idle');
                 player.stop();
                 voice.getVoiceConnection(requester.guild.id).disconnect();
             }
-            console.log(oldState,newState);
+            //console.log(oldState,newState);
 
         });
         player.on('error', error => {
