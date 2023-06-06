@@ -5,6 +5,7 @@ module.exports = {
     devOnly: false,
     run: async ({Client, message, args}) => {
         const { joinVoiceChannel } = require('@discordjs/voice');
+        const voice = require('@discordjs/voice');
         const pitchannel = Client.channels.cache.get("936608289251262515");
         const requester = message.member.voice.channel;
         
@@ -23,6 +24,6 @@ module.exports = {
         });
         connection2.subscribe(player);
         player.stop();
-        connection2.destroy();
+        voice.getVoiceConnection(requester.guild.id).disconnect();
     }
 }

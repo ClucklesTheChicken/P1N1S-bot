@@ -1,4 +1,4 @@
-const bot = require("../app");
+const bot = require("../index");
 const { getFiles } = require("../util/functions");
 
 module.exports = (bot, reload) =>{
@@ -57,6 +57,9 @@ function initEvents(bot){
 
     Client.on("guildMemberUpdate", (member) =>{
         triggerEventHandler(bot, "guildMemberUpdate", member);
+    });
+    Client.on("voiceStateUpdate", (oldMember,newMember) =>{
+        triggerEventHandler(bot, "voiceStateUpdate", oldMember,newMember);
     });
     
 }

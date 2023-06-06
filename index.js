@@ -61,7 +61,21 @@ module.exports = bot;
 
 
 
-
+// Client.on('voiceStateUpdate', (oldMember, newMember) => {
+//     let newUserChannel = newMember.voiceChannel
+//     let oldUserChannel = oldMember.voiceChannel
+  
+  
+//     if(oldUserChannel === undefined && newUserChannel !== undefined) {
+  
+//        // User Joins a voice channel
+//        console.log("user joined channel")
+//     } else if(newUserChannel === undefined){
+  
+//       // User leaves a voice channel
+//       console.log("user left channel")
+//     }
+//   });
 
 
 

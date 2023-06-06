@@ -5,6 +5,7 @@ module.exports = {
     devOnly: false,
     run: async ({Client, message, args}) => {
         const { joinVoiceChannel } = require('@discordjs/voice');
+        const voice = require('@discordjs/voice');
 
         const requester = message.member.voice.channel;
         if (!requester) return console.error("The channel does not exist!");
@@ -47,6 +48,7 @@ module.exports = {
         player.on(AudioPlayerStatus.Idle, () => {
             console.log('The audio player is Idle');
             player.stop();
+            voice.getVoiceConnection(requester.guild.id).disconnect();
         });
         player.on(AudioPlayerStatus.Buffering, () => {
             console.log('The audio player is buffering');

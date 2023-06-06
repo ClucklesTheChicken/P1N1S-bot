@@ -1,5 +1,5 @@
 module.exports = {
-    name: "postpit",
+    name: "cunt",
     category: "sickshit",
     permissions: [],
     devOnly: false,
@@ -16,7 +16,7 @@ module.exports = {
             adapterCreator: requester.guild.voiceAdapterCreator,
         });
 
-        await sleep(3000);
+        await sleep(2000);
         function sleep(ms) {
             return new Promise((resolve) => {
                 setTimeout(resolve, ms);
@@ -31,8 +31,8 @@ module.exports = {
             },
         });
 
-        const resource = createAudioResource('./audio/celebrate.mp3', { inlineVolume: true });
-        resource.volume.setVolume(0.3);
+        const resource = createAudioResource('./audio/cunt.mp3', { inlineVolume: true });
+        resource.volume.setVolume(1.5);
 
         connection.subscribe(player);
         player.play(resource);

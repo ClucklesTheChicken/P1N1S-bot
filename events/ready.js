@@ -1,4 +1,4 @@
-const bot = require("../app")
+const bot = require("../index")
 
 module.exports = {
     name: "ready",

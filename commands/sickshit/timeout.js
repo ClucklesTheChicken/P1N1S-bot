@@ -5,6 +5,7 @@ module.exports = {
     devOnly: false,
     run: async ({Client, message, args}) => {
         const { joinVoiceChannel } = require('@discordjs/voice');
+        const voice = require('@discordjs/voice');
 
         const pitchannel = Client.channels.cache.get("936608289251262515");
         if (!pitchannel) return console.error("The channel does not exist!");
@@ -127,7 +128,7 @@ module.exports = {
                     return false;
                 }
             });
-            connection.destroy();
+            voice.getVoiceConnection(pitchannel.guild.id).disconnect();
         }
     }
 }
