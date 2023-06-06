@@ -82,6 +82,9 @@ module.exports = {
                     player.stop();
                     voice.getVoiceConnection(requester.guild.id).disconnect();
                 }
+                if(newState.status === AudioPlayerStatus.Buffering){
+                    console.log('buffering bitch');
+                }
     
             });
             player.on('error', error => {
